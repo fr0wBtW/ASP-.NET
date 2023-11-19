@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using MoiteRecepti.Data;
-using MoiteRecepti.Data.Common.Models;
-using MoiteRecepti.Data.Common.Repositories;
-using MoiteRecepti.Data.Models;
-
-namespace MoiteRecepti.Web.Areas.Administration.Controllers
+﻿namespace MoiteRecepti.Web.Areas.Administration.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using MoiteRecepti.Data.Common.Repositories;
+    using MoiteRecepti.Data.Models;
+
     [Area("Administration")]
     public class CategoriesController : AdministrationController
     {

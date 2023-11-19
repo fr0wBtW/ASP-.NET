@@ -81,6 +81,13 @@
 
         }
 
+        public async Task DeleteAsync(int id)
+        {
+           var recipe = this.recipesRepository.All().FirstOrDefault(x => x.Id == id);
+            this.recipesRepository.Delete(recipe);
+            await this.recipesRepository.SaveChangesAsync();
+        }
+
         /* Without AutoMapper
           public IEnumerable<RecipeInListViewModel> GetAll(int page, int itemsPerPage = 12)
            {
@@ -115,6 +122,18 @@
 
             return recipe;
         }
+
+        public IEnumerable<T> GetByIngredients<T>(IEnumerable<int> ingredientIds)
+        {
+            var query = this.recipesRepository.All().AsQueryable();
+            foreach (var ingredientId in ingredientIds)
+            {
+                query = query.Where(x => x.Ingredients.Any(i => i.IngredientId == ingredientId));
+            }
+
+            return query.To<T>().ToList();
+        }
+
         public int GetCount()
         {
             return this.recipesRepository.All().Count();
@@ -134,8 +153,8 @@
             recipes.PreparationTime = TimeSpan.FromMinutes(input.PreparationTime);
             recipes.CookingTime = TimeSpan.FromMinutes(input.CookingTime);
             recipes.PortionsCount = input.PortionsCount;
+            recipes.CategoryId = input.CategoryId;
             await this.recipesRepository.SaveChangesAsync();
-
         }
     }
 }
